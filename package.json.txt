@@ -1,0 +1,21 @@
+﻿{
+  "name": "essence-perfumaria",
+  "version": "1.0.0",
+  "type": "module",
+  "dependencies": {
+    "hono": "^4.6.0"
+  },
+  "devDependencies": {
+    "wrangler": "^3.80.0"
+  },
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy"
+  }
+}
+
+      "tag": "v1",
+      "new_sqlite_classes": ["App"]
+    }
+  ]
+}
