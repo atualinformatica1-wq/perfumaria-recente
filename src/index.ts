@@ -505,6 +505,28 @@ export class App extends DurableObject {
       });
     });
 
+    // Upload Image (Base64)
+    this.app.post("/api/upload", async (c) => {
+      try {
+        const formData = await c.req.formData();
+        const file = formData.get("image") as File;
+        if (!file) {
+          return c.json({ error: "Nenhuma imagem enviada" }, 400);
+        }
+        const arrayBuffer = await file.arrayBuffer();
+        const bytes = new Uint8Array(arrayBuffer);
+        let binary = "";
+        for (let i = 0; i < bytes.length; i++) {
+          binary += String.fromCharCode(bytes[i]);
+        }
+        const base64 = btoa(binary);
+        const mimeType = file.type || "image/jpeg";
+        const dataUrl = "data:" + mimeType + ";base64," + base64;
+        return c.json({ ok: true, url: dataUrl });
+      } catch (e) {
+        return c.json({ error: "Erro ao processar imagem" }, 500);
+      }
+    });
     // Reset Demo Endpoint
     this.app.post("/api/reset-demo", (c) => {
       this.ctx.storage.sql.exec(`DROP TABLE IF EXISTS settings`);
@@ -520,3 +542,12 @@ export class App extends DurableObject {
     return this.app.fetch(request);
   }
 }
+
+// Worker principal que roteia requisições para o Durable Object
+export default {
+  async fetch(request: Request, env: any): Promise<Response> {
+    const id = env.APP_DO.idFromName("main");
+    const stub = env.APP_DO.get(id);
+    return stub.fetch(request);
+  }
+};

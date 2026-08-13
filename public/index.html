@@ -1,0 +1,325 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Essence Perfumaria - Haute Parfumerie</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: #fdfbf7; color: #2d2d2d; }
+
+    /* BARRA TOPO */
+    .top-bar { background: #1a1a2e; color: #c9a96e; text-align: center; padding: 10px 20px; font-size: 0.82rem; letter-spacing: 0.5px; }
+
+    /* HEADER */
+    .header { background: #fff; padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 15px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100; }
+    .header-left { display: flex; align-items: center; gap: 12px; }
+    .logo-icon { width: 40px; height: 40px; background: linear-gradient(135deg, #c9a96e, #b8860b); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 1.2rem; }
+    .logo-text h1 { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: #1a1a2e; font-weight: 600; }
+    .logo-text span { font-size: 0.65rem; letter-spacing: 3px; color: #999; text-transform: uppercase; }
+    .header-nav { display: flex; align-items: center; gap: 30px; }
+    .header-nav a { text-decoration: none; color: #555; font-size: 0.9rem; font-weight: 500; transition: color 0.3s; }
+    .header-nav a:hover, .header-nav a.active { color: #c9a96e; }
+    .header-right { display: flex; align-items: center; gap: 12px; }
+    .btn-atendimento { background: #25d366; color: #fff; border: none; padding: 10px 20px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; cursor: pointer; text-decoration: none; display: flex; align-items: center; gap: 6px; }
+    .btn-admin { background: #1a1a2e; color: #fff; border: none; padding: 10px 20px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; cursor: pointer; text-decoration: none; }
+    .btn-heart { background: none; border: none; font-size: 1.3rem; cursor: pointer; color: #999; }
+    .btn-heart:hover { color: #e74c3c; }
+
+    /* HERO */
+    .hero { position: relative; min-height: 550px; display: flex; align-items: center; overflow: hidden; background: #0a0a1a; }
+    .hero-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.4; }
+    .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, rgba(10,10,26,0.85) 0%, rgba(26,26,46,0.7) 100%); }
+    .hero-content { position: relative; z-index: 2; padding: 60px 80px; max-width: 700px; }
+    .hero-badge { display: inline-block; background: rgba(201,169,110,0.15); border: 1px solid rgba(201,169,110,0.4); color: #c9a96e; padding: 8px 18px; border-radius: 30px; font-size: 0.72rem; letter-spacing: 2.5px; text-transform: uppercase; font-weight: 600; margin-bottom: 25px; }
+    .hero-title { font-family: 'Playfair Display', serif; font-size: 3.2rem; color: #fff; line-height: 1.2; margin-bottom: 20px; font-weight: 700; }
+    .hero-subtitle { color: rgba(255,255,255,0.7); font-size: 1.05rem; line-height: 1.7; margin-bottom: 35px; font-weight: 300; }
+    .hero-buttons { display: flex; gap: 15px; flex-wrap: wrap; }
+    .btn-catalog { background: linear-gradient(135deg, #c9a96e, #b8860b); color: #1a1a2e; padding: 16px 32px; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase; transition: transform 0.3s, box-shadow 0.3s; }
+    .btn-catalog:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(201,169,110,0.4); }
+    .btn-quiz { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.3); color: #fff; padding: 16px 32px; border-radius: 8px; text-decoration: none; font-weight: 500; font-size: 0.9rem; display: flex; align-items: center; gap: 8px; transition: background 0.3s; }
+    .btn-quiz:hover { background: rgba(255,255,255,0.2); }
+
+    /* CATÁLOGO */
+    .catalog-section { padding: 60px 40px; max-width: 1200px; margin: 0 auto; }
+    .catalog-header { text-align: center; margin-bottom: 35px; }
+    .catalog-header .label { color: #c9a96e; font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 600; margin-bottom: 8px; }
+    .catalog-header h2 { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: #1a1a2e; margin-bottom: 10px; }
+    .catalog-header p { color: #777; font-size: 0.95rem; max-width: 600px; margin: 0 auto; }
+
+    /* BUSCA CATÁLOGO */
+    .catalog-search { max-width: 600px; margin: 0 auto 30px; }
+    .catalog-search input { width: 100%; padding: 14px 24px; border: 2px solid #e8e8e8; border-radius: 10px; font-size: 0.95rem; outline: none; transition: border-color 0.3s; }
+    .catalog-search input:focus { border-color: #c9a96e; }
+
+    /* FILTROS CATÁLOGO */
+    .catalog-filters { margin-bottom: 30px; }
+    .filter-row { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 15px; }
+    .filter-row .filter-label { font-size: 0.8rem; font-weight: 600; color: #1a1a2e; text-transform: uppercase; letter-spacing: 1px; margin-right: 5px; }
+    .filter-row button { padding: 8px 18px; border: 2px solid #e8e8e8; background: #fff; border-radius: 25px; cursor: pointer; font-size: 0.82rem; font-weight: 500; transition: all 0.3s; }
+    .filter-row button.active { background: #1a1a2e; color: #fff; border-color: #1a1a2e; }
+    .filter-row button:hover:not(.active) { border-color: #c9a96e; background: #fdf9f3; }
+    .filter-row select { padding: 8px 18px; border: 2px solid #e8e8e8; border-radius: 25px; font-size: 0.82rem; outline: none; cursor: pointer; background: #fff; }
+
+    /* GRID PRODUTOS */
+    .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 25px; }
+    .product-card { background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.06); transition: transform 0.3s, box-shadow 0.3s; position: relative; }
+    .product-card:hover { transform: translateY(-5px); box-shadow: 0 8px 30px rgba(0,0,0,0.12); }
+    .product-card .card-badge { position: absolute; top: 12px; left: 12px; background: rgba(26,26,46,0.85); color: #fff; padding: 4px 12px; border-radius: 4px; font-size: 0.7rem; letter-spacing: 1px; text-transform: uppercase; font-weight: 600; }
+    .product-card .card-heart { position: absolute; top: 12px; right: 12px; background: rgba(255,255,255,0.9); border: none; width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1rem; transition: all 0.3s; }
+    .product-card .card-heart:hover { background: #e74c3c; color: #fff; }
+    .product-card img { width: 100%; height: 240px; object-fit: cover; }
+    .product-card .info { padding: 20px; }
+    .product-card .info .category { font-size: 0.75rem; color: #c9a96e; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
+    .product-card .info h3 { font-size: 1rem; margin-top: 6px; color: #1a1a2e; }
+    .product-card .info .description { font-size: 0.82rem; color: #999; margin-top: 5px; }
+    .product-card .info .price { font-size: 1.3rem; font-weight: 700; color: #1a1a2e; margin-top: 10px; }
+    .product-card .btn-whatsapp { display: block; text-align: center; margin: 0 20px 20px; background: #25d366; color: #fff; padding: 12px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 0.85rem; transition: background 0.3s; }
+    .product-card .btn-whatsapp:hover { background: #1da851; }
+
+    /* CORES POR FAMÍLIA */
+    .product-card[data-family="amadeirados"] .card-badge { background: rgba(139,90,43,0.9); }
+    .product-card[data-family="orientais"] .card-badge { background: rgba(100,50,120,0.9); }
+    .product-card[data-family="florais"] .card-badge { background: rgba(200,100,150,0.9); }
+    .product-card[data-family="citricos"] .card-badge { background: rgba(200,180,50,0.9); }
+    .product-card[data-family="aquaticos"] .card-badge { background: rgba(50,130,180,0.9); }
+
+    /* FOOTER */
+    footer { background: #1a1a2e; color: #fff; padding: 50px 40px 30px; }
+    .footer-content { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; }
+    .footer-col h3 { color: #c9a96e; font-family: 'Playfair Display', serif; margin-bottom: 15px; font-size: 1.1rem; }
+    .footer-col p { color: #999; font-size: 0.9rem; line-height: 1.8; }
+    .footer-col a { color: #c9a96e; text-decoration: none; }
+    .footer-bottom { text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); }
+    .footer-bottom p { color: #666; font-size: 0.8rem; }
+
+    /* WHATSAPP FLOAT */
+    .whatsapp-float { position: fixed; bottom: 25px; right: 25px; background: #25d366; color: #fff; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; text-decoration: none; box-shadow: 0 4px 20px rgba(37,211,102,0.4); z-index: 999; transition: transform 0.3s; }
+    .whatsapp-float:hover { transform: scale(1.1); }
+
+    /* RESPONSIVO */
+    @media (max-width: 768px) {
+      .header { padding: 12px 20px; flex-wrap: wrap; gap: 10px; }
+      .header-nav { display: none; }
+      .hero-content { padding: 40px 25px; }
+      .hero-title { font-size: 2.2rem; }
+      .hero-buttons { flex-direction: column; }
+      .catalog-section { padding: 40px 20px; }
+      .catalog-header h2 { font-size: 1.8rem; }
+      .products-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+      .filter-row { justify-content: center; }
+      .footer-content { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="top-bar" id="announcement-bar">Frete Grátis para todo o Brasil em compras acima de R$ 350,00 | Até 6x sem juros</div>
+
+  <header class="header">
+    <div class="header-left">
+      <div class="logo-icon">💧</div>
+      <div class="logo-text">
+        <h1>Essence Perfumaria</h1>
+        <span>Haute Parfumerie</span>
+      </div>
+    </div>
+    <nav class="header-nav">
+      <a href="#home">Início</a>
+      <a href="#catalogo" class="active">Catálogo</a>
+      <a href="#quiz">Descobrir Fragrância</a>
+      <a href="#contact">Sobre Nós</a>
+    </nav>
+    <div class="header-right">
+      <button class="btn-heart" title="Favoritos">♡</button>
+      <a href="#" class="btn-atendimento" id="btn-atendimento">💬 Atendimento</a>
+      <a href="/admin" class="btn-admin">Painel Admin</a>
+    </div>
+  </header>
+
+  <section class="hero" id="hero-section">
+    <img class="hero-bg" id="hero-bg" src="https://images.unsplash.com/photo-1615634260167-c8cdede054de?w=1400&q=80" alt="Perfumes">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-badge">ALTA PERFUMARIA EXCLUSIVA</div>
+      <h2 class="hero-title" id="hero-title">A essência da sua personalidade</h2>
+      <p class="hero-subtitle" id="hero-subtitle">Descubra fragrâncias exclusivas e coleções de alta perfumaria que capturam momentos inesquecíveis.</p>
+      <div class="hero-buttons">
+        <a href="#catalogo" class="btn-catalog">VER CATÁLOGO COMPLETO</a>
+        <a href="#quiz" class="btn-quiz" id="quiz">✨ Quiz: Encontre sua Essência</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATÁLOGO -->
+  <section class="catalog-section" id="catalogo">
+    <div class="catalog-header">
+      <p class="label">NOSSA COLEÇÃO COMPLETA</p>
+      <h2>Catálogo de Fragrâncias</h2>
+      <p>Encontre a essência perfeita entre nossas fragrâncias orientais, amadeiradas, florais e cítricas com excelente fixação.</p>
+    </div>
+
+    <div class="catalog-search">
+      <input type="text" id="search-input" placeholder="Buscar por perfume, nota olfativa (ex: baunilha, rosa, oud)...">
+    </div>
+
+    <div class="catalog-filters">
+      <div class="filter-row">
+        <span class="filter-label">Família:</span>
+        <button class="active" data-family="all">Todos</button>
+        <button data-family="amadeirados">Amadeirados</button>
+        <button data-family="aquaticos">Aquáticos</button>
+        <button data-family="citricos">Cítricos</button>
+        <button data-family="florais">Florais</button>
+        <button data-family="orientais">Orientais</button>
+      </div>
+      <div class="filter-row">
+        <select id="filter-gender">
+          <option value="all">Todos</option>
+          <option value="masculino">Masculino</option>
+          <option value="feminino">Feminino</option>
+          <option value="unissex">Unissex</option>
+        </select>
+        <select id="filter-highlight">
+          <option value="all">Todos</option>
+          <option value="destaque">Destaques</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="products-grid" id="products-grid"></div>
+  </section>
+
+  <footer id="contact">
+    <div class="footer-content">
+      <div class="footer-col">
+        <h3>Essence Perfumaria</h3>
+        <p>Sua loja de alta perfumaria com fragrâncias exclusivas importadas e nacionais.</p>
+      </div>
+      <div class="footer-col">
+        <h3>Endereço</h3>
+        <p id="footer-address">Rua Exemplo, 123 - Centro<br>Cidade/UF - CEP 00000-000</p>
+      </div>
+      <div class="footer-col">
+        <h3>Contato</h3>
+        <p id="footer-phone">Tel: (00) 0000-0000</p>
+        <p id="footer-whatsapp">WhatsApp: <a href="#">(00) 00000-0000</a></p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Essence Perfumaria. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <a href="#" class="whatsapp-float" id="whatsapp-float" target="_blank">💬</a>
+
+  <script>
+    var storeWhatsapp = '5500000000000';
+    var allProducts = [];
+
+    async function loadSettings() {
+      try {
+        var r = await fetch('/api/settings');
+        var s = await r.json();
+        if (s.store_whatsapp) {
+          storeWhatsapp = s.store_whatsapp;
+          document.getElementById('whatsapp-float').href = 'https://wa.me/' + s.store_whatsapp;
+          document.getElementById('btn-atendimento').href = 'https://wa.me/' + s.store_whatsapp;
+        }
+        if (s.hero_title) document.getElementById('hero-title').textContent = s.hero_title;
+        if (s.hero_subtitle) document.getElementById('hero-subtitle').textContent = s.hero_subtitle;
+        if (s.announcement_bar) document.getElementById('announcement-bar').textContent = s.announcement_bar;
+        if (s.store_address) document.getElementById('footer-address').innerHTML = s.store_address.replace(/,/g, '<br>');
+        if (s.store_phone) document.getElementById('footer-phone').textContent = 'Tel: ' + s.store_phone;
+        if (s.hero_image) document.getElementById('hero-bg').src = s.hero_image;
+      } catch(e) {}
+    }
+
+    async function loadProducts() {
+      try {
+        var r = await fetch('/api/products');
+        allProducts = await r.json();
+        renderProducts(allProducts);
+      } catch(e) {
+        document.getElementById('products-grid').innerHTML = '<p style="text-align:center;color:#999;grid-column:1/-1;padding:60px 20px;font-size:1rem;">Nenhum produto cadastrado ainda.<br><a href="/admin" style="color:#c9a96e;">Acesse o painel admin para adicionar</a></p>';
+      }
+    }
+
+    function renderProducts(products) {
+      var grid = document.getElementById('products-grid');
+      if (!products || products.length === 0) {
+        grid.innerHTML = '<p style="text-align:center;color:#999;grid-column:1/-1;padding:60px 20px;font-size:1rem;">Nenhum produto cadastrado ainda.<br><a href="/admin" style="color:#c9a96e;">Acesse o painel admin para adicionar</a></p>';
+        return;
+      }
+      grid.innerHTML = products.map(function(p) {
+        var family = (p.family || p.category || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+        return '<div class="product-card" data-family="' + family + '" data-category="' + (p.category || '') + '" data-gender="' + (p.gender || '').toLowerCase() + '" data-highlight="' + (p.highlight ? 'destaque' : '') + '">' +
+          '<span class="card-badge">' + (p.family || p.category || 'Perfume') + '</span>' +
+          '<button class="card-heart" title="Favoritar">♡</button>' +
+          '<img src="' + (p.img || 'https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=400') + '" alt="' + p.name + '">' +
+          '<div class="info">' +
+            '<span class="category">' + (p.category || '') + '</span>' +
+            '<h3>' + p.name + '</h3>' +
+            (p.description ? '<p class="description">' + p.description + '</p>' : '') +
+            '<div class="price">' + p.price + '</div>' +
+          '</div>' +
+          '<a href="https://wa.me/' + storeWhatsapp + '?text=Olá! Tenho interesse no perfume: ' + encodeURIComponent(p.name) + '" class="btn-whatsapp" target="_blank">💬 Consultar via WhatsApp</a>' +
+        '</div>';
+      }).join('');
+    }
+
+    function filterProducts() {
+      var search = document.getElementById('search-input').value.toLowerCase();
+      var familyActive = document.querySelector('.filter-row button.active');
+      var family = familyActive ? familyActive.dataset.family : 'all';
+      var gender = document.getElementById('filter-gender').value;
+      var highlight = document.getElementById('filter-highlight').value;
+
+      var filtered = allProducts.filter(function(p) {
+        var pFamily = (p.family || p.category || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+        var pGender = (p.gender || '').toLowerCase();
+        var pName = (p.name || '').toLowerCase();
+        var pDesc = (p.description || '').toLowerCase();
+
+        var matchSearch = !search || pName.includes(search) || pDesc.includes(search) || (p.category || '').toLowerCase().includes(search);
+        var matchFamily = family === 'all' || pFamily === family;
+        var matchGender = gender === 'all' || pGender === gender;
+        var matchHighlight = highlight === 'all' || (highlight === 'destaque' && p.highlight);
+
+        return matchSearch && matchFamily && matchGender && matchHighlight;
+      });
+
+      renderProducts(filtered);
+    }
+
+    // FILTRO POR FAMÍLIA
+    document.querySelectorAll('.filter-row button[data-family]').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.filter-row button[data-family]').forEach(function(b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        filterProducts();
+      });
+    });
+
+    // FILTRO POR GÊNERO E DESTAQUE
+    document.getElementById('filter-gender').addEventListener('change', filterProducts);
+    document.getElementById('filter-highlight').addEventListener('change', filterProducts);
+
+    // BUSCA
+    document.getElementById('search-input').addEventListener('input', filterProducts);
+
+    // FAVORITAR
+    document.addEventListener('click', function(e) {
+      if (e.target.classList.contains('card-heart')) {
+        e.target.textContent = e.target.textContent === '♡' ? '♥' : '♡';
+        e.target.style.color = e.target.textContent === '♥' ? '#e74c3c' : '';
+      }
+    });
+
+    loadSettings();
+    loadProducts();
+  </script>
+</body>
+</html>
+
